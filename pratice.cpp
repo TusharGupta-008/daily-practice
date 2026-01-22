@@ -56,6 +56,22 @@ int main(){
 //     }
 // };
 
+/* first maximum element
+
+class Solution {
+  public:
+    int getSecondLargest(vector<int> &arr) {
+        int ans = INT_MIN ;
+        int n=arr.size();
+        
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]>ans)
+            ans=arr[i];
+        }
+
+*/
+
 
 
 
