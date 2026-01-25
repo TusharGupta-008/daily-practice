@@ -147,5 +147,28 @@ public:
                 end = mid - 1;
             }
         }
-    }
+         // Last Occurence
+
+        st = 0, end = arr.size() - 1;
+        while (st <= end) {
+            int mid = st + (end - st) / 2;
+
+            if (arr[mid] == k) {
+                last = mid;
+                st = mid + 1;
+            } else if (arr[mid] < k) {
+                st = mid + 1;
+
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        vector<int>a(2);
+        a[0]=first;
+        a[1]=last;
+
+        return a;
+    } 
+    
 };
