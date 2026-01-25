@@ -192,3 +192,25 @@ class Solution {
 //         }  return n+1;
 //     }
 // };
+int main (){
+     int st = 0, end = arr.size() - 1, index = arr.size();
+        while (st <= end) {
+            int mid = st + (end - st) / 2;
+
+            if (arr[mid] == t) {
+                index = mid;
+                break;
+            } else if (arr[mid] > t){
+                index = mid;
+                end = mid-1;
+            }
+            else{
+                st = mid+1;
+            }
+        } return index;
+
+}
+
+
+ 
+    
