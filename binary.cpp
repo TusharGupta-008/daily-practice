@@ -88,43 +88,64 @@ class Solution {
 };  */
 
 
-int main (){
-    int n;
-    cout <<"Enter the number : ";
-    cin>>n;
+// int main (){
+//     int n;
+//     cout <<"Enter the number : ";
+//     cin>>n;
 
-    int arr[1000];
-    arr[0]=0;
-    arr[1]=1;
+//     int arr[1000];
+//     arr[0]=0;
+//     arr[1]=1;
 
-    for(int i= 2;i<n;i++) {
-        arr[i]=arr[i-1]+arr[i-2];
+//     for(int i= 2;i<n;i++) {
+//         arr[i]=arr[i-1]+arr[i-2];
 
-    }
+//     }
     
 
-    cout<<arr[n-1];
+//     cout<<arr[n-1];
 
     // Problem 704 on leetcode
 
-    class Solution {
-public:
-    int search(vector<int>& arr, int tar) {
+//     class Solution {
+// public:
+//     int search(vector<int>& arr, int tar) {
 
-        int st = 0;
-        int end = arr.size()-1;
+//         int st = 0;
+//         int end = arr.size()-1;
+
+//         while (st <= end) {
+//             int mid = st+(end-st) / 2;
+
+//             if (arr[mid] == tar) {
+//                 return mid;
+//             } else if (arr[mid] < tar) {
+//                 st = mid + 1;
+//             } else {
+//                 end = mid - 1;
+//             }
+//         } return -1;
+//     }
+// };
+// }
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& arr, int k) {
+        // First Occurence
+        int st = 0, end = arr.size() - 1, first = -1, last = -1;
 
         while (st <= end) {
-            int mid = st+(end-st) / 2;
+            int mid = st + (end - st) / 2;
+            if (arr[mid] == k) {
+                first = mid;
+                end = mid - 1;
 
-            if (arr[mid] == tar) {
-                return mid;
-            } else if (arr[mid] < tar) {
+            } else if (arr[mid] < k) {
                 st = mid + 1;
             } else {
                 end = mid - 1;
             }
-        } return -1;
+        }
     }
 };
-}
