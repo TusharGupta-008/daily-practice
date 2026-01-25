@@ -175,20 +175,20 @@ class Solution {
 
 
 //insert position
-class Solution {
-public:
-    int searchInsert(vector<int>& arr, int t) {
-        // int st = 0,end=nums.size()-1;
+// class Solution {
+// public:
+//     int searchInsert(vector<int>& arr, int t) {
+//         // int st = 0,end=nums.size()-1;
 
-        int n = arr.size() - 1;
+//         int n = arr.size() - 1;
 
-        for (int i = 0; i <= n; i++) {
-            if (arr[i] == t) {
-                return i;
-            } else if (arr[i] > t) {
-                return i;
+//         for (int i = 0; i <= n; i++) {
+//             if (arr[i] == t) {
+//                 return i;
+//             } else if (arr[i] > t) {
+//                 return i;
 
-            } 
-        }  return n+1;
-    }
-};
+//             } 
+//         }  return n+1;
+//     }
+// };
