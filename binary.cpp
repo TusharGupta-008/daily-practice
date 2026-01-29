@@ -212,55 +212,103 @@ class Solution {
 // }
 
 // Sqart x
-class Solution {
-public:
-    int mySqrt(int x) {
+// class Solution {
+// public:
+//     int mySqrt(int x) {
 
-        int st=0,end=x,ans,mid;
+//         int st=0,end=x,ans,mid;
 
-        while (st<=end){
-             mid = st+(end-st)/2;
+//         while (st<=end){
+//              mid = st+(end-st)/2;
 
-            if (mid*mid==x){
-                ans= mid;
-                break;
-            }
-            else if(mid*mid<x){
-                ans=mid;
-                st = mid+1;
-            }
-            else{
-                end = mid-1;
-            }
-        } return mid;
+//             if (mid*mid==x){
+//                 ans= mid;
+//                 break;
+//             }
+//             else if(mid*mid<x){
+//                 ans=mid;
+//                 st = mid+1;
+//             }
+//             else{
+//                 end = mid-1;
+//             }
+//         } return mid;
         
-    }
-};
+//     }
+// };
 
-class Solution {
-public:
-    int mySqrt(int x) {
+// class Solution {
+// public:
+//     int mySqrt(int x) {
 
-        int st=0,end=x,ans,mid;
+//         int st=0,end=x,ans,mid;
 
-        while (st<=end){
-             mid = st+(end-st)/2;
+//         while (st<=end){
+//              mid = st+(end-st)/2;
 
-            if (mid*mid==x){
-                ans= mid;
-                break;
-            }
-            else if(mid*mid<x){
-                ans=mid;
-                st = mid+1;
-            }
-            else{
-                end = mid-1;
-            }
-        } return mid;
+//             if (mid*mid==x){
+//                 ans= mid;
+//                 break;
+//             }
+//             else if(mid*mid<x){
+//                 ans=mid;
+//                 st = mid+1;
+//             }
+//             else{
+//                 end = mid-1;
+//             }
+//         } return mid;
         
-    }
-};
+//     }
+// };
 
  
-    
+    bool isPossible(vector<int>& boards, int painters, int maxTime) {
+    int painterCount = 1;
+    long long currentSum = 0;
+
+    for (int i = 0; i < boards.size(); i++) {
+        if (boards[i] > maxTime)
+            return false;
+
+        if (currentSum + boards[i] <= maxTime) {
+            currentSum += boards[i];
+        } else {
+            painterCount++;
+            currentSum = boards[i];
+
+            if (painterCount > painters)
+                return false;
+        }
+    }
+    return true;
+}
+
+int painterPartition(vector<int>& boards, int painters) {
+    int low = 0, high = 0, ans = -1;
+
+    for (int b : boards) {
+        high += b;
+        low = max(low, b);
+    }
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (isPossible(boards, painters, mid)) {
+            ans = mid;
+            high = mid - 1;   // try to minimize
+        } else {
+            low = mid + 1;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    vector<int> boards = {10, 20, 30, 40};
+    int painters = 2;
+
+    cout << painterPartition(boards, painters);
+    return 0;
+}
