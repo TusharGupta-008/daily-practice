@@ -263,62 +263,100 @@ class Solution {
 // };
 
  
-    bool isPossible(vector<int>& boards, int painters, int maxTime) {
-    int painterCount = 1;
-    long long currentSum = 0;
+//     bool isPossible(vector<int>& boards, int painters, int maxTime) {
+//     int painterCount = 1;
+//     long long currentSum = 0;
 
-    for (int i = 0; i < boards.size(); i++) {
-        if (boards[i] > maxTime)
-            return false;
+//     for (int i = 0; i < boards.size(); i++) {
+//         if (boards[i] > maxTime)
+//             return false;
 
-        if (currentSum + boards[i] <= maxTime) {
-            currentSum += boards[i];
-        } else {
-            painterCount++;
-            currentSum = boards[i];
+//         if (currentSum + boards[i] <= maxTime) {
+//             currentSum += boards[i];
+//         } else {
+//             painterCount++;
+//             currentSum = boards[i];
 
-            if (painterCount > painters)
-                return false;
-        }
-    }
-    return true;
-}
+//             if (painterCount > painters)
+//                 return false;
+//         }
+//     }
+//     return true;
+// }
 
-int painterPartition(vector<int>& boards, int painters) {
-    int low = 0, high = 0, ans = -1;
+// int painterPartition(vector<int>& boards, int painters) {
+//     int low = 0, high = 0, ans = -1;
 
-    for (int b : boards) {
-        high += b;
-        low = max(low, b);
-    }
+//     for (int b : boards) {
+//         high += b;
+//         low = max(low, b);
+//     }
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
+//     while (low <= high) {
+//         int mid = low + (high - low) / 2;
 
-        if (isPossible(boards, painters, mid)) {
-            ans = mid;
-            high = mid - 1;   // try to minimize
-        } else {
-            low = mid + 1;
-        }
-    }
-    return ans;
-}
+//         if (isPossible(boards, painters, mid)) {
+//             ans = mid;
+//             high = mid - 1;   // try to minimize
+//         } else {
+//             low = mid + 1;
+//         }
+//     }
+//     return ans;
+// }
 
-int main() {
-    vector<int> boards = {10, 20, 30, 40};
-    int painters = 2;
+// int main() {
+//     vector<int> boards = {10, 20, 30, 40};
+//     int painters = 2;
 
-    cout << painterPartition(boards, painters);
-    return 0;
-}
+//     cout << painterPartition(boards, painters);
+//     return 0;
+// }
 
-bool canPlaceCows(vector<int>& stalls, int cows, int dist) {
-    int count = 1;              // first cow placed
+// bool canPlaceCows(vector<int>& stalls, int cows, int dist) {
+//     int count = 1;              // first cow placed
+//     int lastPos = stalls[0];
+
+//     for (int i = 1; i < stalls.size(); i++) {
+//         if (stalls[i] - lastPos >= dist) {
+//             count++;
+//             lastPos = stalls[i];
+//         }
+//         if (count == cows)
+//             return true;
+//     }
+//     return false;
+// }
+
+// int aggressiveCowsBrute(vector<int>& stalls, int cows) {
+//     sort(stalls.begin(), stalls.end());
+
+//     int maxDist = stalls.back() - stalls.front();
+//     int ans = 0;
+
+//     // Try every possible distance
+//     for (int d = 1; d <= maxDist; d++) {
+//         if (canPlaceCows(stalls, cows, d)) {
+//             ans = d;   // valid distance
+//         }
+//     }
+//     return ans;
+// }
+
+// int main() {
+//     vector<int> stalls = {1, 2, 4, 8, 9};
+//     int cows = 3;
+
+//     cout << aggressiveCowsBrute(stalls, cows);
+//     return 0;
+// }
+
+bool canPlaceCows(vector<int>& stalls, int cows, int minDist) {
+    int count = 1;              // place first cow
     int lastPos = stalls[0];
 
     for (int i = 1; i < stalls.size(); i++) {
-        if (stalls[i] - lastPos >= dist) {
+        if (stalls[i] - lastPos >= minDist) {
             count++;
             lastPos = stalls[i];
         }
@@ -328,16 +366,21 @@ bool canPlaceCows(vector<int>& stalls, int cows, int dist) {
     return false;
 }
 
-int aggressiveCowsBrute(vector<int>& stalls, int cows) {
+int aggressiveCows(vector<int>& stalls, int cows) {
     sort(stalls.begin(), stalls.end());
 
-    int maxDist = stalls.back() - stalls.front();
+    int low = 1;
+    int high = stalls.back() - stalls.front();
     int ans = 0;
 
-    // Try every possible distance
-    for (int d = 1; d <= maxDist; d++) {
-        if (canPlaceCows(stalls, cows, d)) {
-            ans = d;   // valid distance
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (canPlaceCows(stalls, cows, mid)) {
+            ans = mid;          // valid, try bigger distance
+            low = mid + 1;
+        } else {
+            high = mid - 1;     // reduce distance
         }
     }
     return ans;
@@ -347,6 +390,6 @@ int main() {
     vector<int> stalls = {1, 2, 4, 8, 9};
     int cows = 3;
 
-    cout << aggressiveCowsBrute(stalls, cows);
+    cout << aggressiveCows(stalls, cows);
     return 0;
 }
