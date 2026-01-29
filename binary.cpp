@@ -312,3 +312,41 @@ int main() {
     cout << painterPartition(boards, painters);
     return 0;
 }
+
+bool canPlaceCows(vector<int>& stalls, int cows, int dist) {
+    int count = 1;              // first cow placed
+    int lastPos = stalls[0];
+
+    for (int i = 1; i < stalls.size(); i++) {
+        if (stalls[i] - lastPos >= dist) {
+            count++;
+            lastPos = stalls[i];
+        }
+        if (count == cows)
+            return true;
+    }
+    return false;
+}
+
+int aggressiveCowsBrute(vector<int>& stalls, int cows) {
+    sort(stalls.begin(), stalls.end());
+
+    int maxDist = stalls.back() - stalls.front();
+    int ans = 0;
+
+    // Try every possible distance
+    for (int d = 1; d <= maxDist; d++) {
+        if (canPlaceCows(stalls, cows, d)) {
+            ans = d;   // valid distance
+        }
+    }
+    return ans;
+}
+
+int main() {
+    vector<int> stalls = {1, 2, 4, 8, 9};
+    int cows = 3;
+
+    cout << aggressiveCowsBrute(stalls, cows);
+    return 0;
+}
