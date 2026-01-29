@@ -351,45 +351,45 @@ class Solution {
 //     return 0;
 // }
 
-bool canPlaceCows(vector<int>& stalls, int cows, int minDist) {
-    int count = 1;              // place first cow
-    int lastPos = stalls[0];
+// bool canPlaceCows(vector<int>& stalls, int cows, int minDist) {
+//     int count = 1;              // place first cow
+//     int lastPos = stalls[0];
 
-    for (int i = 1; i < stalls.size(); i++) {
-        if (stalls[i] - lastPos >= minDist) {
-            count++;
-            lastPos = stalls[i];
-        }
-        if (count == cows)
-            return true;
-    }
-    return false;
-}
+//     for (int i = 1; i < stalls.size(); i++) {
+//         if (stalls[i] - lastPos >= minDist) {
+//             count++;
+//             lastPos = stalls[i];
+//         }
+//         if (count == cows)
+//             return true;
+//     }
+//     return false;
+// }
 
-int aggressiveCows(vector<int>& stalls, int cows) {
-    sort(stalls.begin(), stalls.end());
+// int aggressiveCows(vector<int>& stalls, int cows) {
+//     sort(stalls.begin(), stalls.end());
 
-    int low = 1;
-    int high = stalls.back() - stalls.front();
-    int ans = 0;
+//     int low = 1;
+//     int high = stalls.back() - stalls.front();
+//     int ans = 0;
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
+//     while (low <= high) {
+//         int mid = low + (high - low) / 2;
 
-        if (canPlaceCows(stalls, cows, mid)) {
-            ans = mid;          // valid, try bigger distance
-            low = mid + 1;
-        } else {
-            high = mid - 1;     // reduce distance
-        }
-    }
-    return ans;
-}
+//         if (canPlaceCows(stalls, cows, mid)) {
+//             ans = mid;          // valid, try bigger distance
+//             low = mid + 1;
+//         } else {
+//             high = mid - 1;     // reduce distance
+//         }
+//     }
+//     return ans;
+// }
 
-int main() {
-    vector<int> stalls = {1, 2, 4, 8, 9};
-    int cows = 3;
+// int main() {
+//     vector<int> stalls = {1, 2, 4, 8, 9};
+//     int cows = 3;
 
-    cout << aggressiveCows(stalls, cows);
-    return 0;
-}
+//     cout << aggressiveCows(stalls, cows);
+//     return 0;
+// }
