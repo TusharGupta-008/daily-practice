@@ -52,16 +52,16 @@ using namespace std;
 //     mergeSort(a, m + 1, r);
 //     merge(a, l, m, r);
 // }
- #include <iostream>
-using namespace std;
+//  #include <iostream>
+// using namespace std;
 
-void printN(int n) {
-    if (n == 0) return;   // base case
-    cout << n << " ";
-    printN(n - 1);        // recursive call
-}
+// void printN(int n) {
+//     if (n == 0) return;   // base case
+//     cout << n << " ";
+//     printN(n - 1);        // recursive call
+// }
 
-int main() {
-    printN(5);
-}
+// int main() {
+//     printN(5);
+// }
 
