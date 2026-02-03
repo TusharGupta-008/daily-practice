@@ -82,3 +82,20 @@ using namespace std;
 //     cout << "Fibonacci number = " << fib(n);
 //     return 0;
 // }
+
+class Solution {
+  public:
+    int missingNum(vector<int>& arr) {
+        long long n = arr.size()+1;
+        long long sum = 0;
+        for (int i : arr){
+            sum += i;
+        }
+        
+        long long totalSum = (n*(n+1))/2;
+        
+        return totalSum - sum;
+        
+        
+    }
+};
