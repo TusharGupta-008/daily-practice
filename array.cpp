@@ -5,7 +5,7 @@ using namespace std;
 class Solution {
 public:
     int getSecondLargest(vector<int> &arr) {
-        int ans = INT_MIN;
+        int ans = arr[0];
         int n = arr.size();
 
         // first loop → find largest
@@ -16,7 +16,7 @@ public:
 
         int maxVal = ans;   // store largest temporarily (required logically)
 
-        ans = INT_MIN;      // reuse ans for second largest
+        ans = arr[0];      // reuse ans for second largest
 
         // second loop → find second largest
         for(int i = 0; i < n; i++){
@@ -25,7 +25,7 @@ public:
             }
         }
 
-        if(ans == INT_MIN) return -1;
+        if(ans == arr[0]) return -1;
         return ans;
     }
 };
