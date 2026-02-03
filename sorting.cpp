@@ -83,19 +83,40 @@ using namespace std;
 //     return 0;
 // }
 
-class Solution {
-  public:
-    int missingNum(vector<int>& arr) {
-        long long n = arr.size()+1;
-        long long sum = 0;
-        for (int i : arr){
-            sum += i;
-        }
+// class Solution {
+//   public:
+//     int missingNum(vector<int>& arr) {
+//         long long n = arr.size()+1;
+//         long long sum = 0;
+//         for (int i : arr){
+//             sum += i;
+//         }
         
-        long long totalSum = (n*(n+1))/2;
+//         long long totalSum = (n*(n+1))/2;
         
-        return totalSum - sum;
+//         return totalSum - sum;
         
         
-    }
-};
+//     }
+// };
+
+// class Solution {
+//   public:
+//     int getSecondLargest(vector<int> &arr) {
+//         int ans = INT_MIN ;
+//         int n=arr.size();
+        
+        
+//         for(int i=0;i<n;i++){
+//             if(arr[i]>ans)
+//             ans=arr[i];
+//         }
+//         int sec = INT_MIN;
+//         for(int i =0;i<n;i++){
+//             if(ans!=arr[i]){
+//                 sec = max(sec,ans);
+//             }
+            
+//         } return sec;
+//     }
+// };
